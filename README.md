@@ -58,10 +58,9 @@ There is a clear and concise example in the repo, preview it in following steps:
 
 Enter this project fold and execute:
 
-        npm instasll
-
-        gulp
+    npm instasll
+    gulp
 
 And visit link:
 
-        /demo/index.html
+    /demo/index.html
