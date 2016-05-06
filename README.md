@@ -4,10 +4,7 @@ A React Component which can help you clamp Multi-line text.
 
 ## Getting Started
 
-Options for adding Less.js to your project:
-
 * Install with [npm](https://npmjs.org): `npm install react-clamp`
-* [Download the latest release][download]
 * Clone the repo: `https://github.com/oglen/react-clamp`
 
 ## Usage
@@ -32,14 +29,14 @@ Options for adding Less.js to your project:
                 return <div className="container">
                     <div className="grid" id="demo">
                         <div className="column">
-                            <LineClamp className="card" ellipsis="..." ref="aCard">
+                            <Clamp className="card" ellipsis="..." ref="aCard">
                             Brisbane’s Waterfront Place and the Eagle Street Pier retail complex were snapped up by property giant Dexus Property Group and Dexus Wholesale Property Fund for a staggering $635 million.
-                            </LineClamp>
+                            </Clamp>
                         </div>
                         <div className="column">
-                            <LineClamp className="card" ellipsis={<span>&nbsp;<a href="#">Read More</a></span>} ref="bCard">
+                            <Clamp className="card" ellipsis={<span>&nbsp;<a href="#">Read More</a></span>} ref="bCard">
                             Brisbane’s Waterfront Place and the Eagle Street Pier retail complex were snapped up by property giant Dexus Property Group and Dexus Wholesale Property Fund for a staggering $635 million.
-                            </LineClamp>
+                            </Clamp>
                         </div>
                     </div>
                 </div>
@@ -49,11 +46,11 @@ Options for adding Less.js to your project:
         }
 3. And set the card style:
 
-    .card {
-      height: 60px;
-      overflow: hidden;
-      line-height: 20px;
-    }
+        .card {
+          height: 60px;
+          overflow: hidden;
+          line-height: 20px;
+        }
 
 ## Run Demo
 
