@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _merge = require('lodash/merge');
+
+var _merge2 = _interopRequireDefault(_merge);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26,10 +30,17 @@ var Clamp = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Clamp).call(this, props));
 
+    _this.adjustIntervalHandler = null;
+
+
     _this.state = {
       context: _this.props.children,
       ellipsis: _this.props.ellipsis
     };
+
+    _this.option = (0, _merge2.default)({
+      autoAdjustInterval: 200
+    }, _this.props.option);
     return _this;
   }
 
@@ -103,7 +114,28 @@ var Clamp = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this3 = this;
+
       this.adjustContext();
+
+      if (this.option.autoAdjustInterval > 0) {
+        (function () {
+          var prevWidthOfWrap = null;
+          _this3.adjustIntervalHandler = setInterval(function () {
+            var widthOfWrap = _this3._getWrapRect_().width;
+
+            if (prevWidthOfWrap !== widthOfWrap) {
+              _this3.adjustContext();
+              prevWidthOfWrap = widthOfWrap;
+            }
+          }, _this3.option.autoAdjustInterval);
+        })();
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearInterval(this.adjustIntervalHandler);
     }
   }, {
     key: 'render',

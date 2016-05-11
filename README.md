@@ -20,8 +20,6 @@ A React Component which can help you clamp Multi-line text.
             componentDidMount() {
                 window && window.addEventListener('resize', event => {
                     this.refs.aCard.adjustContext();
-                    this.refs.bCard.adjustContext();
-                    this.refs.cCard.adjustContext();
                 });
             }
 
@@ -29,7 +27,7 @@ A React Component which can help you clamp Multi-line text.
                 return <div className="container">
                     <div className="grid" id="demo">
                         <div className="column">
-                            <Clamp className="card" ellipsis="..." ref="aCard">
+                            <Clamp className="card" ellipsis="..." ref="aCard" option={{autoAdjustInterval: 0}} >
                             Brisbane’s Waterfront Place and the Eagle Street Pier retail complex were snapped up by property giant Dexus Property Group and Dexus Wholesale Property Fund for a staggering $635 million.
                             </Clamp>
                         </div>
@@ -44,6 +42,8 @@ A React Component which can help you clamp Multi-line text.
 
             ...
         }
+    In default, the option is {autoAdjustInterval: 200}, it will ensure adjusting is automatic.
+
 3. And set the card style:
 
         .card {

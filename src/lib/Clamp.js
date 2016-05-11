@@ -1,6 +1,9 @@
 import React from 'react';
+import merge from 'lodash/merge';
 
 export default class Clamp extends React.Component {
+
+  adjustIntervalHandler = null;
 
   constructor(props) {
     super(props);
@@ -9,6 +12,10 @@ export default class Clamp extends React.Component {
       context: this.props.children,
       ellipsis: this.props.ellipsis
     };
+
+    this.option = merge({
+      autoAdjustInterval: 200
+    }, this.props.option);
   }
 
   _getWrapRect_() {
@@ -72,6 +79,23 @@ export default class Clamp extends React.Component {
 
   componentDidMount() {
     this.adjustContext();
+
+    if (this.option.autoAdjustInterval > 0) {
+      let prevWidthOfWrap = null;
+      this.adjustIntervalHandler = setInterval(() => {
+        const widthOfWrap = this._getWrapRect_().width;
+
+        if (prevWidthOfWrap !== widthOfWrap) {
+          this.adjustContext();
+          prevWidthOfWrap = widthOfWrap;
+        }
+
+      }, this.option.autoAdjustInterval);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.adjustIntervalHandler);
   }
 
   render() {
