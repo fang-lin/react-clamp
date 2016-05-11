@@ -2,7 +2,7 @@
   "name": "react-line-clamp",
   "version": "1.1.0",
   "description": "A react component which can help you implememt line-clamp automatically",
-  "main": "LineClamp.js",
+  "main": "Clamp.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "[[ $(find ./dist -type d 2>/dev/null) ]] && rm -r dist; exit 0",
@@ -12,6 +12,10 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/oglen/react-clamp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oglen/react-clamp.git"
   },
   "homepage": "https://github.com/oglen/react-clamp#readme",
   "keywords": [
