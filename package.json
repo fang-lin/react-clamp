@@ -1,6 +1,6 @@
 {
   "name": "react-line-clamp",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A react component which can help you implememt line-clamp automatically",
   "main": "LineClamp.js",
   "scripts": {
