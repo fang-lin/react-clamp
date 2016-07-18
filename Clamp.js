@@ -165,4 +165,11 @@ var Clamp = function (_React$Component) {
   return Clamp;
 }(_react2.default.Component);
 
+Clamp.propTypes = {
+  children: _react2.default.PropTypes.node,
+  className: _react2.default.PropTypes.string,
+  ellipsis: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.node, _react2.default.PropTypes.string]),
+  option: _react2.default.PropTypes.object
+};
+
 exports.default = Clamp;

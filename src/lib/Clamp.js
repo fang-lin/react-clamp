@@ -1,7 +1,7 @@
 import React from 'react';
 import merge from 'lodash/merge';
 
-export default class Clamp extends React.Component {
+class Clamp extends React.Component {
 
   adjustIntervalHandler = null;
 
@@ -108,3 +108,15 @@ export default class Clamp extends React.Component {
     </div>
   }
 }
+
+Clamp.propTypes = {
+  children: React.PropTypes.node,
+  className: React.PropTypes.string,
+  ellipsis: React.PropTypes.oneOfType([
+    React.PropTypes.node,
+    React.PropTypes.string
+  ]),
+  option: React.PropTypes.object
+};
+
+export default Clamp;
