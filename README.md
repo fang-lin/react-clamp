@@ -58,7 +58,7 @@ There is a clear and concise example in the repo, preview it in following steps:
 
 Enter this project fold and execute:
 
-    npm instasll
+    npm install
     gulp
 
 And visit link:
