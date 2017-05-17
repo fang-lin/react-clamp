@@ -56,7 +56,7 @@ A React Component which can help you clamp Multi-line text.
 
 There is a clear and concise example in the repo, preview it in following steps:
 
-Enter this project fold and execute:
+Enter the project fold and execute:
 
     npm install
     gulp
