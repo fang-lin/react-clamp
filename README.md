@@ -4,14 +4,14 @@ A React Component which can help you clamp Multi-line text.
 
 ## Getting Started
 
-* Install with [npm](https://npmjs.org): `npm install react-clamp`
+* Install with [npm](https://npmjs.org): `npm install react-line-clamp`
 * Clone the repo: `https://github.com/oglen/react-clamp`
 
 ## Usage
 
 1. require react-clamp to your react component:
 
-        import Clamp from 'react-clamp';
+        import Clamp from 'react-line-clamp';
 
 2. Use react-clamp in your component:
 
