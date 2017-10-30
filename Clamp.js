@@ -58,47 +58,45 @@ var Clamp = function (_React$Component) {
         value: function adjustContext() {
             var _this2 = this;
 
-            this.refs.context.innerHTML = this.refs.text.innerHTML;
+            this.refs.context.innerHTML = this.refs.text.innerText;
 
             var heightOfWrap = this._getWrapRect_().height;
             var heightOfContext = this._getContextRect_().height;
 
             if (heightOfContext > heightOfWrap) {
-                (function () {
-                    var text = _this2.refs.raw.innerText;
-                    var ellipsis = _this2.refs.ellipsis.innerHTML;
+                var text = this.refs.text.innerText;
+                var ellipsis = this.refs.ellipsis.innerHTML;
 
-                    var low = 0,
-                        high = text.length,
-                        mid = void 0;
-                    var count = 0;
+                var low = 0,
+                    high = text.length,
+                    mid = void 0;
+                var count = 0;
 
-                    var clamp = function clamp() {
-                        if (count > 100) return;
-                        count++;
+                var clamp = function clamp() {
+                    if (count > 100) return;
+                    count++;
 
-                        mid = (low + high) / 2 | 0;
-                        var _text = text.slice(0, mid);
-                        _this2.refs.context.innerHTML = _text + ellipsis;
+                    mid = (low + high) / 2 | 0;
+                    var _text = text.slice(0, mid);
+                    _this2.refs.context.innerHTML = _text + ellipsis;
 
-                        var contextHeight = _this2._getContextRect_().height;
-                        var wrapHeight = _this2._getWrapRect_().height;
+                    var contextHeight = _this2._getContextRect_().height;
+                    var wrapHeight = _this2._getWrapRect_().height;
 
-                        if (contextHeight > wrapHeight) {
-                            high = mid - 1;
-                        } else {
-                            low = mid + 1;
-                        }
+                    if (contextHeight > wrapHeight) {
+                        high = mid - 1;
+                    } else {
+                        low = mid + 1;
+                    }
 
-                        if (low <= high) {
-                            _requestAnimationFrame_(clamp);
-                        } else {
-                            _this2.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
-                        }
-                    };
+                    if (low <= high) {
+                        _requestAnimationFrame_(clamp);
+                    } else {
+                        _this2.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
+                    }
+                };
 
-                    clamp();
-                })();
+                clamp();
             }
         }
     }, {
@@ -109,17 +107,15 @@ var Clamp = function (_React$Component) {
             this.adjustContext();
 
             if (this.option.autoAdjustInterval > 0) {
-                (function () {
-                    var prevWidthOfWrap = null;
-                    _this3.adjustIntervalHandler = setInterval(function () {
-                        var widthOfWrap = _this3._getWrapRect_().width;
+                var prevWidthOfWrap = null;
+                this.adjustIntervalHandler = setInterval(function () {
+                    var widthOfWrap = _this3._getWrapRect_().width;
 
-                        if (prevWidthOfWrap !== widthOfWrap) {
-                            _this3.adjustContext();
-                            prevWidthOfWrap = widthOfWrap;
-                        }
-                    }, _this3.option.autoAdjustInterval);
-                })();
+                    if (prevWidthOfWrap !== widthOfWrap) {
+                        _this3.adjustContext();
+                        prevWidthOfWrap = widthOfWrap;
+                    }
+                }, this.option.autoAdjustInterval);
             }
         }
     }, {
@@ -130,6 +126,7 @@ var Clamp = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            console.log(this.props.children);
             return _react2.default.createElement(
                 'div',
                 { className: this.props.className, ref: 'wrap', style: this.props.style },
@@ -139,7 +136,7 @@ var Clamp = function (_React$Component) {
                     { ref: 'raw', style: { opacity: 0 } },
                     _react2.default.createElement(
                         'span',
-                        { ref: 'text' },
+                        { ref: 'text', dangerouslySetInnerHTML: this.props.dangerouslySetInnerHTML },
                         this.props.children
                     ),
                     _react2.default.createElement(

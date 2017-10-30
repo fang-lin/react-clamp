@@ -20,8 +20,7 @@ class App extends React.Component {
     return <div className="container">
       <div className="grid" id="demo">
         <div className="column">
-          <Clamp className="card" ellipsis="..." option={{autoAdjustInterval: 0}} ref="aCard">
-            Some of Australia’s largest waterfront office buildings are changing hands, with Melbourne’s South Wharf Tower up for sale and a Brisbane building fetching one of the highest prices for an office complex in the past
+          <Clamp className="card" ellipsis="..." option={{autoAdjustInterval: 0}} ref="aCard" dangerouslySetInnerHTML={{__html: 'Brisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and the'}}>
           </Clamp>
         </div>
         <div className="column">

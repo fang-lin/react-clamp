@@ -24,13 +24,13 @@ class Clamp extends React.Component {
     }
 
     adjustContext() {
-        this.refs.context.innerHTML = this.refs.text.innerHTML;
+        this.refs.context.innerHTML = this.refs.text.innerText;
 
         const heightOfWrap = this._getWrapRect_().height;
         const heightOfContext = this._getContextRect_().height;
 
         if (heightOfContext > heightOfWrap) {
-            const text = this.refs.raw.innerText;
+            const text = this.refs.text.innerText;
             const ellipsis = this.refs.ellipsis.innerHTML;
 
             let low = 0, high = text.length, mid;
@@ -86,10 +86,11 @@ class Clamp extends React.Component {
     }
 
     render() {
+        console.log(this.props.children)
         return <div className={this.props.className} ref="wrap" style={this.props.style}>
             <div ref="context"></div>
             <div ref="raw" style={{opacity: 0}}>
-                <span ref="text">{this.props.children}</span>
+                <span ref="text" dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>{this.props.children}</span>
                 <span ref="ellipsis">{this.props.ellipsis}</span>
             </div>
         </div>
