@@ -26,42 +26,48 @@ class Clamp extends React.Component {
     }
 
     adjustContext() {
-        const text = this.rawContextText;
-        const ellipsis = this.props.ellipsis || '';
+        this.refs.context.innerHTML = this.rawContextText;
 
-        let low = 0, high = text.length, mid;
-        let count = 0;
+        const heightOfWrap = this._getWrapRect_().height;
+        const heightOfContext = this._getContextRect_().height;
 
-        const clamp = () => {
-            if (count > 100) return;
-            count++;
+        if (heightOfContext > heightOfWrap) {
+            const text = this.rawContextText;
+            const ellipsis = this.props.ellipsis || '';
 
-            mid = (low + high) / 2 | 0;
-            const _text = text.slice(0, mid);
-            this.refs.context.innerHTML = _text + ellipsis;
+            let low = 0, high = text.length, mid;
+            let count = 0;
 
-            const contextHeight = this._getContextRect_().height;
-            const wrapHeight = this._getWrapRect_().height;
+            const clamp = () => {
+                if (count > 100) return;
+                count++;
 
-            if (contextHeight > wrapHeight) {
-                high = mid - 1;
-            } else {
-                low = mid + 1;
-            }
+                mid = (low + high) / 2 | 0;
+                const _text = text.slice(0, mid);
+                this.refs.context.innerHTML = _text + ellipsis;
 
-            if (low <= high) {
-                this.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
-            } else {
-                this.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
-            }
-        };
+                const contextHeight = this._getContextRect_().height;
+                const wrapHeight = this._getWrapRect_().height;
 
-        clamp();
+                if (contextHeight > wrapHeight) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+
+                if (low <= high) {
+                    this.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
+                } else {
+                    this.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
+                }
+            };
+
+            clamp();
+        }
     }
 
     componentDidMount() {
         this.rawContextText = this.refs.context.innerText;
-        console.log(this.rawContextText)
         this.adjustContext();
 
         if (this.autoAdjustInterval > 0) {
