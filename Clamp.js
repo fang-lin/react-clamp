@@ -39,11 +39,10 @@ var Clamp = function (_React$Component) {
 
         _this.adjustIntervalHandler = null;
         _this.requestAnimationFrameHandler = null;
+        _this.rawContextText = null;
+        _this.autoAdjustInterval = 300;
 
-
-        _this.option = (0, _merge2.default)({
-            autoAdjustInterval: 300
-        }, _this.props.option);
+        if (Number.isInteger(_this.props.autoAdjustInterval)) _this.autoAdjustInterval = Math.abs(_this.props.autoAdjustInterval);
         return _this;
     }
 
@@ -62,14 +61,12 @@ var Clamp = function (_React$Component) {
         value: function adjustContext() {
             var _this2 = this;
 
-            this.refs.context.innerHTML = this.refs.text.innerText;
-
             var heightOfWrap = this._getWrapRect_().height;
             var heightOfContext = this._getContextRect_().height;
 
             if (heightOfContext > heightOfWrap) {
-                var text = this.refs.text.innerText;
-                var ellipsis = this.refs.ellipsis.innerHTML;
+                var text = this.rawContextText;
+                var ellipsis = this.props.ellipsis || '';
 
                 var low = 0,
                     high = text.length,
@@ -108,9 +105,10 @@ var Clamp = function (_React$Component) {
         value: function componentDidMount() {
             var _this3 = this;
 
+            this.rawContextText = this.refs.context.innerText;
             this.adjustContext();
 
-            if (this.option.autoAdjustInterval > 0) {
+            if (this.autoAdjustInterval > 0) {
                 var prevWidthOfWrap = null;
                 this.adjustIntervalHandler = setInterval(function () {
                     var widthOfWrap = _this3._getWrapRect_().width;
@@ -119,7 +117,7 @@ var Clamp = function (_React$Component) {
                         _this3.adjustContext();
                         prevWidthOfWrap = widthOfWrap;
                     }
-                }, this.option.autoAdjustInterval);
+                }, this.autoAdjustInterval);
             }
         }
     }, {
@@ -134,21 +132,10 @@ var Clamp = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { className: this.props.className, ref: 'wrap', style: this.props.style },
-                _react2.default.createElement('div', { ref: 'context' }),
                 _react2.default.createElement(
                     'div',
-                    { ref: 'raw', style: { opacity: 0 } },
-                    _react2.default.createElement(
-                        'span',
-                        { ref: 'text',
-                            dangerouslySetInnerHTML: this.props.dangerouslySetInnerHTML },
-                        this.props.children
-                    ),
-                    _react2.default.createElement(
-                        'span',
-                        { ref: 'ellipsis' },
-                        this.props.ellipsis
-                    )
+                    { ref: 'context', className: this.props.innerClassName, style: this.props.innerStyle, dangerouslySetInnerHTML: this.props.dangerouslySetInnerHTML },
+                    this.props.children
                 )
             );
         }

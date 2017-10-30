@@ -20,16 +20,16 @@ class App extends React.Component {
     return <div className="container">
       <div className="grid" id="demo">
         <div className="column">
-          <Clamp className="card" ellipsis="..." option={{autoAdjustInterval: 0}} ref="aCard" dangerouslySetInnerHTML={{__html: 'Brisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and the'}}>
+          <Clamp className="card" ellipsis="..." autoAdjustInterval={0} ref="aCard" dangerouslySetInnerHTML={{__html: 'Brisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and the'}}>
           </Clamp>
         </div>
         <div className="column">
-          <Clamp className="card" option={{}} ref="bCard">
+          <Clamp className="card" ref="bCard">
             Brisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and the
           </Clamp>
         </div>
         <div className="column">
-          <Clamp className="card" style={{height: "150px"}} ellipsis={<span>&nbsp;<a href="#">Read More</a></span>} option={{}} ref="cCard">
+          <Clamp className="card" innerClassName="inner-card" style={{height: "150px"}} innerStyle={{color: "#399"}} ellipsis={'<span>&nbsp;<a href="#">Read More</a></span>'} ref="cCard">
             <div>
               <span>Brisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and the</span>
               <div>

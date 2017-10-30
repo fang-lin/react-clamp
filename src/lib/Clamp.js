@@ -8,13 +8,13 @@ class Clamp extends React.Component {
 
     adjustIntervalHandler = null;
     requestAnimationFrameHandler = null;
+    rawContextText = null;
+    autoAdjustInterval = 300;
 
     constructor(props) {
         super(props);
-
-        this.option = merge({
-            autoAdjustInterval: 300
-        }, this.props.option);
+        if (Number.isInteger(this.props.autoAdjustInterval))
+            this.autoAdjustInterval = Math.abs(this.props.autoAdjustInterval);
     }
 
     _getWrapRect_() {
@@ -26,14 +26,13 @@ class Clamp extends React.Component {
     }
 
     adjustContext() {
-        this.refs.context.innerHTML = this.refs.text.innerText;
 
         const heightOfWrap = this._getWrapRect_().height;
         const heightOfContext = this._getContextRect_().height;
 
         if (heightOfContext > heightOfWrap) {
-            const text = this.refs.text.innerText;
-            const ellipsis = this.refs.ellipsis.innerHTML;
+            const text = this.rawContextText;
+            const ellipsis = this.props.ellipsis || '';
 
             let low = 0, high = text.length, mid;
             let count = 0;
@@ -67,9 +66,10 @@ class Clamp extends React.Component {
     }
 
     componentDidMount() {
+        this.rawContextText = this.refs.context.innerText;
         this.adjustContext();
 
-        if (this.option.autoAdjustInterval > 0) {
+        if (this.autoAdjustInterval > 0) {
             let prevWidthOfWrap = null;
             this.adjustIntervalHandler = setInterval(() => {
                 const widthOfWrap = this._getWrapRect_().width;
@@ -79,7 +79,7 @@ class Clamp extends React.Component {
                     prevWidthOfWrap = widthOfWrap;
                 }
 
-            }, this.option.autoAdjustInterval);
+            }, this.autoAdjustInterval);
         }
     }
 
@@ -90,12 +90,7 @@ class Clamp extends React.Component {
 
     render() {
         return <div className={this.props.className} ref="wrap" style={this.props.style}>
-            <div ref="context"></div>
-            <div ref="raw" style={{opacity: 0}}>
-                <span ref="text"
-                      dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>{this.props.children}</span>
-                <span ref="ellipsis">{this.props.ellipsis}</span>
-            </div>
+            <div ref="context" className={this.props.innerClassName} style={this.props.innerStyle} dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>{this.props.children}</div>
         </div>
     }
 }

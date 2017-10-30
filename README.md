@@ -27,12 +27,12 @@ A React Component which can help you clamp Multi-line text.
                 return <div className="container">
                     <div className="grid" id="demo">
                         <div className="column">
-                            <Clamp className="card" ellipsis="..." ref="aCard" option={{autoAdjustInterval: 0}} >
+                            <Clamp className="card" innerClassName="inner-card" ellipsis="..." ref="aCard" autoAdjustInterval={0} style={{height: '150px'}} innerStyle={{color: "#366"}}>
                             Brisbane’s Waterfront Place and the Eagle Street Pier retail complex were snapped up by property giant Dexus Property Group and Dexus Wholesale Property Fund for a staggering $635 million.
                             </Clamp>
                         </div>
                         <div className="column">
-                            <Clamp className="card" ellipsis={<span>&nbsp;<a href="#">Read More</a></span>} ref="bCard">
+                            <Clamp className="card" innerClassName="inner-card" ellipsis="<span>&nbsp;<a href="#">Read More</a></span>" ref="bCard">
                             Brisbane’s Waterfront Place and the Eagle Street Pier retail complex were snapped up by property giant Dexus Property Group and Dexus Wholesale Property Fund for a staggering $635 million.
                             </Clamp>
                         </div>
