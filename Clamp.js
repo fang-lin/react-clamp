@@ -61,44 +61,39 @@ var Clamp = function (_React$Component) {
         value: function adjustContext() {
             var _this2 = this;
 
-            var heightOfWrap = this._getWrapRect_().height;
-            var heightOfContext = this._getContextRect_().height;
+            var text = this.rawContextText;
+            var ellipsis = this.props.ellipsis || '';
 
-            if (heightOfContext > heightOfWrap) {
-                var text = this.rawContextText;
-                var ellipsis = this.props.ellipsis || '';
+            var low = 0,
+                high = text.length,
+                mid = void 0;
+            var count = 0;
 
-                var low = 0,
-                    high = text.length,
-                    mid = void 0;
-                var count = 0;
+            var clamp = function clamp() {
+                if (count > 100) return;
+                count++;
 
-                var clamp = function clamp() {
-                    if (count > 100) return;
-                    count++;
+                mid = (low + high) / 2 | 0;
+                var _text = text.slice(0, mid);
+                _this2.refs.context.innerHTML = _text + ellipsis;
 
-                    mid = (low + high) / 2 | 0;
-                    var _text = text.slice(0, mid);
-                    _this2.refs.context.innerHTML = _text + ellipsis;
+                var contextHeight = _this2._getContextRect_().height;
+                var wrapHeight = _this2._getWrapRect_().height;
 
-                    var contextHeight = _this2._getContextRect_().height;
-                    var wrapHeight = _this2._getWrapRect_().height;
+                if (contextHeight > wrapHeight) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
 
-                    if (contextHeight > wrapHeight) {
-                        high = mid - 1;
-                    } else {
-                        low = mid + 1;
-                    }
+                if (low <= high) {
+                    _this2.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
+                } else {
+                    _this2.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
+                }
+            };
 
-                    if (low <= high) {
-                        _this2.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
-                    } else {
-                        _this2.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
-                    }
-                };
-
-                clamp();
-            }
+            clamp();
         }
     }, {
         key: 'componentDidMount',
@@ -106,6 +101,7 @@ var Clamp = function (_React$Component) {
             var _this3 = this;
 
             this.rawContextText = this.refs.context.innerText;
+            console.log(this.rawContextText);
             this.adjustContext();
 
             if (this.autoAdjustInterval > 0) {
@@ -134,7 +130,8 @@ var Clamp = function (_React$Component) {
                 { className: this.props.className, ref: 'wrap', style: this.props.style },
                 _react2.default.createElement(
                     'div',
-                    { ref: 'context', className: this.props.innerClassName, style: this.props.innerStyle, dangerouslySetInnerHTML: this.props.dangerouslySetInnerHTML },
+                    { ref: 'context', className: this.props.innerClassName, style: this.props.innerStyle,
+                        dangerouslySetInnerHTML: this.props.dangerouslySetInnerHTML },
                     this.props.children
                 )
             );

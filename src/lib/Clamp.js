@@ -26,47 +26,42 @@ class Clamp extends React.Component {
     }
 
     adjustContext() {
+        const text = this.rawContextText;
+        const ellipsis = this.props.ellipsis || '';
 
-        const heightOfWrap = this._getWrapRect_().height;
-        const heightOfContext = this._getContextRect_().height;
+        let low = 0, high = text.length, mid;
+        let count = 0;
 
-        if (heightOfContext > heightOfWrap) {
-            const text = this.rawContextText;
-            const ellipsis = this.props.ellipsis || '';
+        const clamp = () => {
+            if (count > 100) return;
+            count++;
 
-            let low = 0, high = text.length, mid;
-            let count = 0;
+            mid = (low + high) / 2 | 0;
+            const _text = text.slice(0, mid);
+            this.refs.context.innerHTML = _text + ellipsis;
 
-            const clamp = () => {
-                if (count > 100) return;
-                count++;
+            const contextHeight = this._getContextRect_().height;
+            const wrapHeight = this._getWrapRect_().height;
 
-                mid = (low + high) / 2 | 0;
-                const _text = text.slice(0, mid);
-                this.refs.context.innerHTML = _text + ellipsis;
+            if (contextHeight > wrapHeight) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
 
-                const contextHeight = this._getContextRect_().height;
-                const wrapHeight = this._getWrapRect_().height;
+            if (low <= high) {
+                this.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
+            } else {
+                this.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
+            }
+        };
 
-                if (contextHeight > wrapHeight) {
-                    high = mid - 1;
-                } else {
-                    low = mid + 1;
-                }
-
-                if (low <= high) {
-                    this.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
-                } else {
-                    this.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
-                }
-            };
-
-            clamp();
-        }
+        clamp();
     }
 
     componentDidMount() {
         this.rawContextText = this.refs.context.innerText;
+        console.log(this.rawContextText)
         this.adjustContext();
 
         if (this.autoAdjustInterval > 0) {
@@ -90,7 +85,8 @@ class Clamp extends React.Component {
 
     render() {
         return <div className={this.props.className} ref="wrap" style={this.props.style}>
-            <div ref="context" className={this.props.innerClassName} style={this.props.innerStyle} dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>{this.props.children}</div>
+            <div ref="context" className={this.props.innerClassName} style={this.props.innerStyle}
+                 dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>{this.props.children}</div>
         </div>
     }
 }
