@@ -30,24 +30,29 @@ class App extends React.Component {
         </div>
         <div className="column">
           <Clamp className="card" style={{height: "150px"}} ellipsis={<span>&nbsp;<a href="#">Read More</a></span>} option={{}} ref="cCard">
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
-            “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+            <div>
+              <span>Brisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and theBrisbane’s Waterfront Place and the</span>
+              <div>
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+                “Waterfront Place complements our ownership of 480 Queen Street in Brisbane and reinforces our role as a workspace partner for our customers.”
+              </div>
+            </div>
           </Clamp>
         </div>
       </div>

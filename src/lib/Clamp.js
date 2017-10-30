@@ -2,10 +2,12 @@ import React from 'react';
 import merge from 'lodash/merge';
 
 const _requestAnimationFrame_ = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : cb => cb();
+const _cancelAnimationFrame_ = typeof cancelAnimationFrame === 'function' ? cancelAnimationFrame : cb => cb();
 
 class Clamp extends React.Component {
 
     adjustIntervalHandler = null;
+    requestAnimationFrameHandler = null;
 
     constructor(props) {
         super(props);
@@ -54,7 +56,7 @@ class Clamp extends React.Component {
                 }
 
                 if (low <= high) {
-                    _requestAnimationFrame_(clamp);
+                    this.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
                 } else {
                     this.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
                 }
@@ -83,14 +85,15 @@ class Clamp extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.adjustIntervalHandler);
+        _cancelAnimationFrame_(this.requestAnimationFrameHandler);
     }
 
     render() {
-        console.log(this.props.children)
         return <div className={this.props.className} ref="wrap" style={this.props.style}>
             <div ref="context"></div>
             <div ref="raw" style={{opacity: 0}}>
-                <span ref="text" dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>{this.props.children}</span>
+                <span ref="text"
+                      dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>{this.props.children}</span>
                 <span ref="ellipsis">{this.props.ellipsis}</span>
             </div>
         </div>

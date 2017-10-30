@@ -25,6 +25,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var _requestAnimationFrame_ = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : function (cb) {
     return cb();
 };
+var _cancelAnimationFrame_ = typeof cancelAnimationFrame === 'function' ? cancelAnimationFrame : function (cb) {
+    return cb();
+};
 
 var Clamp = function (_React$Component) {
     _inherits(Clamp, _React$Component);
@@ -35,6 +38,7 @@ var Clamp = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Clamp.__proto__ || Object.getPrototypeOf(Clamp)).call(this, props));
 
         _this.adjustIntervalHandler = null;
+        _this.requestAnimationFrameHandler = null;
 
 
         _this.option = (0, _merge2.default)({
@@ -90,7 +94,7 @@ var Clamp = function (_React$Component) {
                     }
 
                     if (low <= high) {
-                        _requestAnimationFrame_(clamp);
+                        _this2.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
                     } else {
                         _this2.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
                     }
@@ -122,11 +126,11 @@ var Clamp = function (_React$Component) {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
             clearInterval(this.adjustIntervalHandler);
+            _cancelAnimationFrame_(this.requestAnimationFrameHandler);
         }
     }, {
         key: 'render',
         value: function render() {
-            console.log(this.props.children);
             return _react2.default.createElement(
                 'div',
                 { className: this.props.className, ref: 'wrap', style: this.props.style },
@@ -136,7 +140,8 @@ var Clamp = function (_React$Component) {
                     { ref: 'raw', style: { opacity: 0 } },
                     _react2.default.createElement(
                         'span',
-                        { ref: 'text', dangerouslySetInnerHTML: this.props.dangerouslySetInnerHTML },
+                        { ref: 'text',
+                            dangerouslySetInnerHTML: this.props.dangerouslySetInnerHTML },
                         this.props.children
                     ),
                     _react2.default.createElement(
