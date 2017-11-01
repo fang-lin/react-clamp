@@ -25,7 +25,7 @@ class Clamp extends React.Component {
         return this.refs.context.getBoundingClientRect();
     }
 
-    adjustContext() {
+    adjustContext(callback) {
         this.refs.context.innerHTML = this.rawContextText;
 
         const heightOfWrap = this._getWrapRect_().height;
@@ -59,6 +59,7 @@ class Clamp extends React.Component {
                     this.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
                 } else {
                     this.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
+                    typeof callback === 'function' && callback();
                 }
             };
 
@@ -72,12 +73,16 @@ class Clamp extends React.Component {
 
         if (this.autoAdjustInterval > 0) {
             let prevWidthOfWrap = null;
+            let prevHeightOfWrap = null;
             this.adjustIntervalHandler = setInterval(() => {
                 const widthOfWrap = this._getWrapRect_().width;
+                const heightOfWrap = this._getWrapRect_().height;
 
-                if (prevWidthOfWrap !== widthOfWrap) {
-                    this.adjustContext();
-                    prevWidthOfWrap = widthOfWrap;
+                if (prevWidthOfWrap !== widthOfWrap || prevHeightOfWrap !== heightOfWrap) {
+                    this.adjustContext(() => {
+                        prevWidthOfWrap = widthOfWrap;
+                        prevHeightOfWrap = heightOfWrap;
+                    });
                 }
 
             }, this.autoAdjustInterval);

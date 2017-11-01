@@ -58,7 +58,7 @@ var Clamp = function (_React$Component) {
         }
     }, {
         key: 'adjustContext',
-        value: function adjustContext() {
+        value: function adjustContext(callback) {
             var _this2 = this;
 
             this.refs.context.innerHTML = this.rawContextText;
@@ -96,6 +96,7 @@ var Clamp = function (_React$Component) {
                         _this2.requestAnimationFrameHandler = _requestAnimationFrame_(clamp);
                     } else {
                         _this2.refs.context.innerHTML = _text.slice(0, mid - 1) + ellipsis;
+                        typeof callback === 'function' && callback();
                     }
                 };
 
@@ -112,12 +113,16 @@ var Clamp = function (_React$Component) {
 
             if (this.autoAdjustInterval > 0) {
                 var prevWidthOfWrap = null;
+                var prevHeightOfWrap = null;
                 this.adjustIntervalHandler = setInterval(function () {
                     var widthOfWrap = _this3._getWrapRect_().width;
+                    var heightOfWrap = _this3._getWrapRect_().height;
 
-                    if (prevWidthOfWrap !== widthOfWrap) {
-                        _this3.adjustContext();
-                        prevWidthOfWrap = widthOfWrap;
+                    if (prevWidthOfWrap !== widthOfWrap || prevHeightOfWrap !== heightOfWrap) {
+                        _this3.adjustContext(function () {
+                            prevWidthOfWrap = widthOfWrap;
+                            prevHeightOfWrap = heightOfWrap;
+                        });
                     }
                 }, this.autoAdjustInterval);
             }
